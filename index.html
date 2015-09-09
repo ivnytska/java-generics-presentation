@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Generics in JAVA</title>
+
+    <meta name="description" content="Generics in JAVA">
+    <meta name="author" content="Anna Ivnytska">
+
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" href="bower_components/reveal.js/css/reveal.min.css">
+    <link rel="stylesheet" href="bower_components/reveal.js/css/theme/default.css" id="theme">
+    <link rel="stylesheet" href="css/additionalStyles.css">
+
+    <!-- For syntax highlighting -->
+    <link rel="stylesheet" href="bower_components/reveal.js/lib/css/zenburn.css">
+
+    <!-- If the query includes 'print-pdf', include the PDF print sheet -->
+    <script>
+        if (window.location.search.match(/print-pdf/gi)) {
+            var link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            link.href = 'bower_components/reveal.js/css/print/pdf.css';
+            document.getElementsByTagName('head')[0].appendChild(link);
+        }
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="bower_components/reveal.js/lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="reveal">
+
+    <!-- Any section element inside of this container is displayed as a slide -->
+    <div class="slides">
+        <!--1 слайд-->
+        <section>
+            <h1>Generics</h1>
+            <h3>in</h3>
+            <h2>JAVA</h2>
+
+            <p>
+                <small>Автор <a target="_blank" href="https://vk.com/anivni">Анна Ивницкая</a></small>
+            </p>
+        </section>
+
+        <!--2 слайд-->
+        <section>
+            <h3>Что такое обобщения?</h3>
+            <br/>
+            <p><strong>Обобщения (generics)</strong> - это параметризированные типы.</p>
+            <br/>
+            <h4>Достоинства обобщений:</h4>
+            <ul>
+                <li>Обеспечивают безопасность типов на этапе компиляции</li>
+                <li>Операции приведения типов выполяются автоматически и неявно</li>
+                <li>Позволят использовать один алгоритм для разных типов данных</li>
+            </ul>
+        </section>
+
+        <!--3 слайд-->
+        <section>
+            <h3>JAVA до версии 5.0</h3>
+            <br/>
+            <pre><code>
+                class Box {
+                    private Object item;
+                    public void setItem (Object o) {
+                        item = o;
+                    }
+                    public Object getItem () {
+                        return item;
+                    }
+                }
+            </code></pre>
+            <pre><code>
+                public class Test {
+                    public static void main(String[] args) {
+                        Box box = new Box();
+                        box.setItem("hello");
+                        String str1 = (String)box.getItem();
+                        System.out.println(str1);
+                    }
+                }
+            </code></pre>
+            <p>Результат выполнения: hello</p>
+        </section>
+
+        <!--4 слайд-->
+        <section>
+            <h3>JAVA 5.0</h3>
+            <pre><code>
+                class Box&lt;T&gt; {
+                    private T item;
+                    public void setItem (T o) {
+                        item = o;
+                    }
+                    public T getItem () {
+                        return item;
+                    }
+                }
+            </code></pre>
+            <pre><code>
+                public class Test {
+                    public static void main(String[] args) {
+                        Box&lt;String&gt; box = new Box&lt;String&gt;();
+                        box.setItem("hello");
+                        String str1 = box.getItem();
+                        System.out.println(str1);
+                    }
+                }
+            </code></pre>
+            <p>Результат выполнения: hello</p>
+        </section>
+
+        <!--5 слайд-->
+        <section>
+            <h>Ошибка выполнения</h>
+            <pre><code>
+                class Box {
+                    private Object item;
+                    public void setItem (Object o) {
+                        item = o;
+                    }
+                    public Object getItem () {
+                        return item;
+                    }
+                }
+            </code></pre>
+            <pre><code>
+                public class Test {
+                    public static void main(String[] args) {
+                        Box box = new Box();
+                        box.setItem("hello");
+                        Integer int1 = (Integer)box.getItem();//Exception
+                        System.out.println(int1);
+                    }
+                }
+            </code></pre>
+            <span style="color:crimson; font-size: 30px;">Exception in thread "main" java.lang.ClassCastException: java.lang.String cannot be cast to java.lang.Integer</span>
+        </section>
+
+        <section>
+            <p>Ошибка компиляции</p>
+            <pre><code>
+                class Box&lt;T&gt; {
+                    private T item;
+                    public void setItem (T o) {
+                        item = o;
+                    }
+                    public T getItem () {
+                        return item;
+                    }
+                }
+            </code></pre>
+            <pre><code>
+                public class Test {
+                    public static void main(String[] args) {
+                        Box&lt;String&gt; box = new Box&lt;String&gt;();
+                        box.setItem("1234567");//Exception
+                        String str1 = box.getItem();
+                        System.out.println(str1);
+                    }
+                }
+            </code></pre>
+            <span style="color:crimson; font-size: 30px;">Compilation completed with 1 error</span>
+            <span style="color:crimson; font-size: 30px;">Error: java: incompatible types: int cannot be converted to java.lang.String</span>
+        </section>
+
+        <section>
+            <h1>Вопросы?</h1>
+        </section>
+
+        <section>
+            <p>Эта презентация доступна по адресу:</p>
+            <p><a target="_blank"
+                  href="http://ivnytska.github.io/java-generics-presentation">http://ivnytska.github.io/java-generics-presentation</a></p>
+            <br/>
+            <p>Презентация создана с помощью <a target="_blank" href="http://lab.hakim.se/reveal-js/">Reveal.js</a></p>
+        </section>
+
+        <section>
+            <h1>Спасибо за внимание</h1>
+        </section>
+    </div>
+
+</div>
+
+<script src="bower_components/reveal.js/lib/js/head.min.js"></script>
+<script src="bower_components/reveal.js/js/reveal.min.js"></script>
+
+<script>
+
+    // Full list of configuration options available here:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+        transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+        // Parallax scrolling
+        // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+        // parallaxBackgroundSize: '2100px 900px',
+
+        // Optional libraries used to extend on reveal.js
+        dependencies: [
+            {
+                src: 'bower_components/reveal.js/lib/js/classList.js', condition: function () {
+                return !document.body.classList;
+            }
+            },
+            {
+                src: 'bower_components/reveal.js/plugin/markdown/marked.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'bower_components/reveal.js/plugin/markdown/markdown.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'bower_components/reveal.js/plugin/highlight/highlight.js', async: true, callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+            },
+            {
+                src: 'bower_components/reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function () {
+                return !!document.body.classList;
+            }
+            },
+            {
+                src: 'bower_components/reveal.js/plugin/notes/notes.js', async: true, condition: function () {
+                return !!document.body.classList;
+            }
+            }
+        ]
+    });
+
+</script>
+
+</body>
+</html>

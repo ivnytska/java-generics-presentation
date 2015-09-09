@@ -1,0 +1,25 @@
+{
+  "name": "java-generics-presentation",
+  "version": "0.0.1",
+  "description": "Java generics presentation",
+  "main": "index.html",
+  "authors": [
+    "Anna Ivnytska"
+  ],
+  "keywords": [
+    "presentation",
+    "java",
+    "generics"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "reveal.js": "~2.6.2"
+  }
+}

@@ -1,0 +1,40 @@
+.reveal table {
+    margin: auto;
+    border-collapse: collapse;
+    border-spacing: 0; }
+
+.reveal table th {
+    font-weight: bold; }
+
+.reveal table th,
+.reveal table td {
+    text-align: left;
+    padding: 0.2em 0.5em 0.2em 0.5em;
+    border-bottom: 1px solid; }
+
+.reveal table tr:last-child td {
+    border-bottom: none;
+}
+
+.plusesAndMinusesTable td,
+.plusesAndMinusesTable th {
+    width: 50%;
+}
+
+.plusesAndMinusesTable td {
+    font-size: 26px;
+}
+
+.plusesAndMinusesTable td:first-child {
+    border-right: 1px solid white;
+}
+
+.plusesAndMinusesTable td li {
+    padding-top: 0.4em;
+    padding-bottom: 0.4em;
+}
+
+.result li {
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+}
