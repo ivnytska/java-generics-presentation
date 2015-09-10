@@ -167,7 +167,7 @@
                 public class Test {
                     public static void main(String[] args) {
                         Box&lt;String&gt; box = new Box&lt;String&gt;();
-                        box.setItem("1234567");//Exception
+                        box.setItem(1234567);//Exception
                         String str1 = box.getItem();
                         System.out.println(str1);
                     }
@@ -178,7 +178,141 @@
         </section>
 
         <section>
-            <h1>Вопросы?</h1>
+            <p>Обобщения действуют только со ссылочными типами</p>
+            <pre><code>
+                Box&lt;int&gt; box = new Box&lt;int&gt;(); //Error!
+            </code></pre>
+        </section>
+
+        <section>
+            <p>Обобщенный класс с двумя параметрами типа</p>
+            <pre><code>
+                class Box&lt;T, V&gt; {
+                    private T item;
+                    private V item2;
+
+                    public Box(T o, V o2) {
+                        item = o;
+                        item2 = o2;
+                    }
+                }
+            </code></pre>
+        </section>
+
+        <section>
+            <h3>Ограниченные типы</h3>
+            <p>Ограничение сверху</p>
+            <pre><code>
+                class Box &lt;T extends Number&gt;{
+                    private T item;
+                    public void setItem (T o) {
+                        item = o;
+                    }
+                    public Integer getIntValue () {
+                        return item.intValue();
+                    }
+                }
+            </code></pre>
+            <pre><code>
+                public class Test {
+                    public static void main(String[] args) {
+                        Box&lt;Float&gt; box = new Box<>();
+                        box.setItem(123.45F);
+                        Integer int1 = box.getIntValue();
+                        System.out.println(int1);
+                    }
+                }
+            </code></pre>
+        </section>
+
+        <section>
+            <h3>Применение метасимвольных аргументов</h3>
+            <pre><code>
+                class Box&lt;Т&gt; {}
+
+                class Human {
+                    public void useBox(Box&lt;?&gt; box) {}
+                }
+            </code></pre>
+            <pre><code>
+                public class Test {
+                    public static void main(String[] args) {
+                        Box&lt;String&gt; stringBox = new Box&lt;&gt;();
+                        Box&lt;Number&gt; numberBox = new Box&lt;&gt;();
+
+                        Human human = new Human();
+
+                        human.useBox(stringBox);
+                        human.useBox(numberBox);
+                    }
+                }
+            </code></pre>
+        </section>
+
+        <section>
+            <h3>Обобщенные интерфейсы</h3>
+            <pre><code>
+                interface Box&lt;Т&gt; {
+                    setItem(T item);
+                }
+
+                class BoxImpl implements Box&lt;String&gt; {
+                    public void setItem(String item) {}
+                }
+            </code></pre>
+            <pre><code>
+                public class Test {
+                    public static void main(String[] args) {
+                        Box&lt;String&gt; stringBox = new BoxImpl&lt;&gt;();
+                        stringBox.setItem("Hello World");
+                    }
+                }
+            </code></pre>
+        </section>
+
+        <section>
+            <h3>Иерархия обобщенных класов</h3>
+            <pre><code>
+                class Box&lt;Т&gt; {
+                    public void setItem (T item) {}
+                }
+
+                class BigBox&lt;K, T&gt; extends Box&lt;T&gt; {
+                    public void setBigItems(K item, T item2) {}
+                }
+            </code></pre>
+            <pre><code>
+                public class Test {
+                    public static void main(String[] args) {
+                        BigBox&lt;String, Integer&gt; stringBox = new BigBox&lt;&gt;();
+                        stringBox.setItem("Very big item", 23);
+                    }
+                }
+            </code></pre>
+        </section>
+
+        <section>
+            <h3>Старый код и обобщенные класы</h3>
+            <pre><code>
+                class Box&lt;Т&gt; {
+                    private T item;
+                    public void setItem (T item) {
+                        this.item = item;
+                    }
+                    public T getItem() {
+                        return item;
+                    }
+                }
+            </code></pre>
+            <pre><code>
+                public class Test {
+                    public static void main(String[] args) {
+                        Box box = new Box();
+                        box.setItem("string");
+                        String str = (String)box.getItem();
+                    }
+                }
+            </code></pre>
         </section>
 
         <section>
