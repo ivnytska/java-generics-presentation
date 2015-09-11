@@ -96,33 +96,6 @@
             <p>Результат выполнения: hello</p>
         </section>
 
-        <!--4 слайд-->
-        <section>
-            <h3>JAVA 5.0</h3>
-            <pre><code>
-                class Box&lt;T&gt; {
-                    private T item;
-                    public void setItem (T o) {
-                        item = o;
-                    }
-                    public T getItem () {
-                        return item;
-                    }
-                }
-            </code></pre>
-            <pre><code>
-                public class Test {
-                    public static void main(String[] args) {
-                        Box&lt;String&gt; box = new Box&lt;String&gt;();
-                        box.setItem("hello");
-                        String str1 = box.getItem();
-                        System.out.println(str1);
-                    }
-                }
-            </code></pre>
-            <p>Результат выполнения: hello</p>
-        </section>
-
         <!--5 слайд-->
         <section>
             <h>Ошибка выполнения</h>
@@ -148,6 +121,33 @@
                 }
             </code></pre>
             <span style="color:crimson; font-size: 30px;">Exception in thread "main" java.lang.ClassCastException: java.lang.String cannot be cast to java.lang.Integer</span>
+        </section>
+
+        <!--4 слайд-->
+        <section>
+            <h3>JAVA 5.0</h3>
+            <pre><code>
+                class Box&lt;T&gt; {
+                    private T item;
+                    public void setItem (T o) {
+                        item = o;
+                    }
+                    public T getItem () {
+                        return item;
+                    }
+                }
+            </code></pre>
+            <pre><code>
+                public class Test {
+                    public static void main(String[] args) {
+                        Box&lt;String&gt; box = new Box&lt;String&gt;();
+                        box.setItem("hello");
+                        String str1 = box.getItem();
+                        System.out.println(str1);
+                    }
+                }
+            </code></pre>
+            <p>Результат выполнения: hello</p>
         </section>
 
         <section>
